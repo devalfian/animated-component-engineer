@@ -1,0 +1,7 @@
+{
+  "name": "audit-fixture-clean",
+  "private": true,
+  "dependencies": {
+    "framer-motion": "11.0.0"
+  }
+}

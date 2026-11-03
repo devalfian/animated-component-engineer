@@ -12,5 +12,26 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
       - name: Validate skill package
         run: python scripts/validate_skill.py
+
+      - name: Auditor — parses
+        run: node --check skills/animated-component-engineer/scripts/audit-motion.mjs
+
+      - name: Auditor — flags the dirty fixture
+        run: |
+          set +e
+          node skills/animated-component-engineer/scripts/audit-motion.mjs tests/fixtures/dirty --quiet
+          status=$?
+          set -e
+          if [ "$status" -ne 1 ]; then
+            echo "expected exit 1 from the dirty fixture, got $status"
+            exit 1
+          fi
+
+      - name: Auditor — passes the clean fixture
+        run: node skills/animated-component-engineer/scripts/audit-motion.mjs tests/fixtures/clean --quiet

@@ -1,0 +1,11 @@
+@keyframes grow {
+  from { height: 0; }
+  to { height: 100px; }
+}
+
+.a { will-change: transform; }
+.b { will-change: transform; }
+.c { will-change: transform; }
+.d { will-change: transform; }
+.e { will-change: transform; }
+.f { will-change: transform; }

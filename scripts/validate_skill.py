@@ -26,13 +26,17 @@ if skill_file.is_file():
         require(re.search(r"(?m)^description:\s*.+$", frontmatter) is not None,
                 "Frontmatter description is required")
 
-for folder in ("docs", "templates"):
+for folder in ("docs", "templates", "scripts"):
     require((SKILL / folder).is_dir(), f"Missing skill folder: {folder}")
 
 for relative in (
     "docs/exploration-and-design.md",
     "docs/engine-selection.md",
     "docs/motion-patterns.md",
+    "docs/motion-vocabulary.md",
+    "docs/per-frame-architecture.md",
+    "docs/text-motion.md",
+    "docs/perf-budget.md",
     "docs/assets-and-illustrations.md",
     "docs/component-architecture.md",
     "docs/performance-accessibility.md",
@@ -40,8 +44,28 @@ for relative in (
     "templates/animation-brief.md",
     "templates/acceptance-checklist.md",
     "templates/prompt-recipes.md",
+    "templates/verification-report.md",
+    "templates/decision-record.md",
+    "scripts/audit-motion.mjs",
 ):
     require((SKILL / relative).is_file(), f"Missing required file: {relative}")
+
+audit = SKILL / "scripts" / "audit-motion.mjs"
+if audit.is_file():
+    audit_text = audit.read_text(encoding="utf-8")
+    require(audit_text.startswith("#!/usr/bin/env node"),
+            "scripts/audit-motion.mjs must start with a node shebang")
+    require("process.exit(fails.length > 0 ? 1 : 0)" in audit_text,
+            "scripts/audit-motion.mjs must exit non-zero when there are FAILs")
+
+test_dir = ROOT / "tests" / "test-scenarios"
+require(test_dir.is_dir(), "Missing tests/test-scenarios")
+if test_dir.is_dir():
+    require(len(list(test_dir.glob("*.md"))) >= 5,
+            "tests/test-scenarios must contain at least five scenarios")
+
+for fixture in ("tests/fixtures/dirty", "tests/fixtures/clean"):
+    require((ROOT / fixture).is_dir(), f"Missing auditor fixture: {fixture}")
 
 version_path = ROOT / "VERSION"
 changelog_path = ROOT / "CHANGELOG.md"
