@@ -7,16 +7,14 @@ A reusable, agent-agnostic skill for designing, implementing, and validating pol
 ### Any supported agent (recommended)
 
 ```bash
-npx skills add YOUR_GITHUB_USERNAME/animated-component-engineer --skill animated-component-engineer
+npx skills add devalfian/animated-component-engineer --skill animated-component-engineer
 ```
 
 ### Cline, global installation
 
 ```bash
-npx skills add YOUR_GITHUB_USERNAME/animated-component-engineer --skill animated-component-engineer --agent cline -g
+npx skills add devalfian/animated-component-engineer --skill animated-component-engineer --agent cline -g
 ```
-
-Replace `YOUR_GITHUB_USERNAME` with the GitHub account or organization that owns this repository.
 
 ## Update
 
