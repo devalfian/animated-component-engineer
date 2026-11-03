@@ -1,3 +1,5 @@
+// @ts-nocheck — this fixture imports packages that are not installed in this
+// repository. It exists for the auditor's smoke test, not for type checking.
 // Deliberately violates the audit rules. If the auditor stops reporting these,
 // the gate has rotted — see ../../test-scenarios/07-jank-investigation.md.
 import { motion } from 'framer-motion'

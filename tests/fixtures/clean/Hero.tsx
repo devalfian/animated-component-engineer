@@ -1,3 +1,5 @@
+// @ts-nocheck — this fixture imports packages that are not installed in this
+// repository. It exists for the auditor's smoke test, not for type checking.
 // Satisfies every mechanical rule. If the auditor starts reporting findings here,
 // it has grown a false positive and will get ignored in real projects.
 import { motion } from 'framer-motion'
